@@ -1,0 +1,130 @@
+﻿<Window x:Class="StructuralLayoutEngine.LayoutWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="CHIA ĐỐI TƯỢNG VÀ SẮP BẢN VẼ TỰ ĐỘNG" SizeToContent="Height" Width="490"
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize" FontFamily="Segoe UI" FontSize="12">
+	<Grid Margin="10">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+		</Grid.RowDefinitions>
+
+		<!-- 1. THÔNG SỐ KHOẢNG CÁCH SẮP XẾP -->
+		<GroupBox Grid.Row="0" Header="Thông số khoảng cách sắp xếp" Margin="0,0,0,6" Padding="6,4">
+			<Grid>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+				</Grid.RowDefinitions>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="230"/>
+					<ColumnDefinition Width="*"/>
+				</Grid.ColumnDefinitions>
+
+				<TextBlock Grid.Row="0" Grid.Column="0" Text="Khoảng cách giữa 2 View X (Dx mm):" VerticalAlignment="Center"/>
+				<TextBox Grid.Row="0" Grid.Column="1" x:Name="txtDx" Height="23" Margin="0,2,0,2" VerticalContentAlignment="Center"/>
+
+				<TextBlock Grid.Row="1" Grid.Column="0" Text="Khoảng cách giữa 2 View Y (Dy mm):" VerticalAlignment="Center"/>
+				<TextBox Grid.Row="1" Grid.Column="1" x:Name="txtDy" Height="23" Margin="0,2,0,2" VerticalContentAlignment="Center"/>
+
+				<TextBlock Grid.Row="2" Grid.Column="0" Text="Overlap khi dầm/cột quá khổ (mm):" VerticalAlignment="Center"/>
+				<TextBox Grid.Row="2" Grid.Column="1" x:Name="txtOverlap" Height="23" Margin="0,2,0,2" VerticalContentAlignment="Center"/>
+
+				<TextBlock Grid.Row="3" Grid.Column="0" Text="Khoảng cách 2 Khung tên (mm):" VerticalAlignment="Center"/>
+				<TextBox Grid.Row="3" Grid.Column="1" x:Name="txtDFrame" Height="23" Margin="0,2,0,2" VerticalContentAlignment="Center"/>
+
+				<TextBlock Grid.Row="4" Grid.Column="0" Text="Tỷ lệ muốn sắp xếp (1/x):" VerticalAlignment="Center"/>
+				<TextBox Grid.Row="4" Grid.Column="1" x:Name="txtTargetScale" Height="23" Margin="0,2,0,2" VerticalContentAlignment="Center"/>
+
+				<!-- TÙY CHỌN CĂN GIỮA ĐỐI XỨNG X & Y -->
+				<CheckBox Grid.Row="5" Grid.ColumnSpan="2" x:Name="chkCenterX" Content="Căn giữa đối xứng theo phương X khung làm việc" Margin="0,4,0,2"/>
+				<CheckBox Grid.Row="6" Grid.ColumnSpan="2" x:Name="chkCenterY" Content="Căn giữa đối xứng theo phương Y khung làm việc" Margin="0,2,0,2"/>
+			</Grid>
+		</GroupBox>
+
+		<!-- 2. THUẬT TOÁN SẮP XẾP THÔNG MINH -->
+		<GroupBox Grid.Row="1" Header="Sắp xếp thông minh" Margin="0,0,0,6" Padding="6,4">
+			<StackPanel>
+				<CheckBox x:Name="chkOptimized" Content="Sắp xếp tối ưu (Lấp đầy khoảng trống ngang &amp; Cột đứng)" Margin="0,2,0,4" FontWeight="SemiBold" Foreground="#0055AA"/>
+				<CheckBox x:Name="chkGroupCluster" Content="Gom nguyên cụm cấu kiện (Dầm + Mặt cắt luôn đi liền nhau)" Margin="0,0,0,4"/>
+				<CheckBox x:Name="chkAutoFillTitle" Content="Tự động điền Tên &amp; Loại cấu kiện vào Khung tên" Margin="0,0,0,2"/>
+			</StackPanel>
+		</GroupBox>
+
+		<!-- 3. ĐÁNH SỐ HIỆU BẢN VẼ -->
+		<GroupBox Grid.Row="2" Header="Đánh số hiệu bản vẽ" Margin="0,0,0,6" Padding="6,4">
+			<Grid>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+				</Grid.RowDefinitions>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*"/>
+					<ColumnDefinition Width="*"/>
+					<ColumnDefinition Width="*"/>
+				</Grid.ColumnDefinitions>
+
+				<CheckBox Grid.Row="0" Grid.ColumnSpan="3" x:Name="chkAutoNumbering" Content="Tự động nhảy số hiệu bản vẽ vào khung tên" Margin="0,2,0,4"/>
+
+				<StackPanel Grid.Row="1" Grid.Column="0" Margin="0,0,4,0">
+					<TextBlock Text="Tiền tố (Prefix):" Margin="0,0,0,2"/>
+					<TextBox x:Name="txtPrefix" Height="23" VerticalContentAlignment="Center"/>
+				</StackPanel>
+
+				<StackPanel Grid.Row="1" Grid.Column="1" Margin="2,0,2,0">
+					<TextBlock Text="Số bắt đầu:" FontWeight="SemiBold" Foreground="#0055AA" Margin="0,0,0,2"/>
+					<TextBox x:Name="txtStartIndex" Height="23" VerticalContentAlignment="Center"/>
+				</StackPanel>
+
+				<StackPanel Grid.Row="1" Grid.Column="2" Margin="4,0,0,0">
+					<TextBlock Text="Hậu tố (Suffix):" Margin="0,0,0,2"/>
+					<TextBox x:Name="txtSuffix" Height="23" VerticalContentAlignment="Center"/>
+				</StackPanel>
+			</Grid>
+		</GroupBox>
+
+		<!-- 4. KHUNG TÊN MẪU ĐANG CHỌN -->
+		<GroupBox Grid.Row="3" Header="Khung tên mẫu đang chọn" Margin="0,0,0,8" Padding="6,4">
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*"/>
+					<ColumnDefinition Width="110"/>
+				</Grid.ColumnDefinitions>
+
+				<StackPanel Grid.Column="0" VerticalAlignment="Center">
+					<TextBlock x:Name="txtFrameName" Text="Tên khung: AMC-khung ten doc" FontWeight="Bold"/>
+					<TextBlock x:Name="txtFrameInfo" Text="Trạng thái: Tỷ lệ gốc 1/50" Foreground="#555555" Margin="0,2,0,0"/>
+				</StackPanel>
+
+				<Button Grid.Column="1" Content="Chọn lại Khung..." Height="28" Click="BtnPick_Click"/>
+			</Grid>
+		</GroupBox>
+
+		<!-- 5. NÚT RUN VÀ THOÁT -->
+		<Grid Grid.Row="4" Margin="0,0,0,8">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="80"/>
+			</Grid.ColumnDefinitions>
+
+			<Button Grid.Column="0" Content="RUN (SẮP XẾP BẢN VẼ)" Height="34" Margin="0,0,6,0" 
+                    Background="#007ACC" Foreground="White" FontWeight="Bold" FontSize="13" 
+                    IsDefault="True" Click="BtnRun_Click"/>
+			<Button Grid.Column="1" Content="Thoát" Height="34" IsCancel="True"/>
+		</Grid>
+
+		<!-- 6. DÒNG BẢN QUYỀN CHUẨN CĂN GIỮA -->
+		<Border Grid.Row="5" BorderBrush="#E0E0E0" BorderThickness="0,1,0,0" Padding="0,6,0,2">
+			<TextBlock Text="Copyright by DuyNT-0975.311.786" HorizontalAlignment="Center" FontWeight="Bold" Foreground="#666666" FontSize="11"/>
+		</Border>
+	</Grid>
+</Window>
